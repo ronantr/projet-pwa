@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+#editor-container {
+  height: 50px;
+  margin-bottom: 30px;
+
+}
+#editor-container1 {
+  height: 50px;
+  margin-bottom: 30px;
+}
+#editor-container2 {
+  height: 375px;
+}
+
+
