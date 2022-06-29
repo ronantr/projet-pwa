@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Presentation from './Presentation'
 import { auth } from '../service/firebase'
 import '../App.css';
+// import {Firebase} from '../service/firebase'
+import {db} from '../service/firebase'
+import {addPresentation,getPresentations} from '../service/dbHelpers'
+
 function Home({user}) {
     const [inputTitle, setInputTitle] = useState('');
     const [presentations, setPresentations] = useState([])
+    const[test, setTest] = useState('')
     const [showForm, setShowForm] = useState(false)
-    const handleAddPresentation = (e) => {
+    const handleAddPresentation = () => {
     setShowForm(true)
                 }
 
@@ -14,13 +19,27 @@ function Home({user}) {
         setInputTitle(e.target.value)
     }
 
-    const handleSubmitAddPresentation = () => {
-        setPresentations([...presentations,inputTitle]
-    )
-
-            setShowForm(false)
+    const handleSubmitAddPresentation = async () => {
+        setPresentations([...presentations,inputTitle])
+        addPresentation(
+            {
+                title: inputTitle,
+                author: {
+                    name: user.displayName,
+                    email: user.email,
+                },
+                editor: [
+                    {}
+                ],
+            }
+        )
+        setShowForm(false)
     }
-        
+      
+useEffect(() => {
+    setTest(getPresentations())
+}, []);
+
   return (
       <>
        <h1>Hello, <span></span>{user.displayName}</h1>
@@ -45,6 +64,10 @@ function Home({user}) {
         }
     </div>
       
+      <div>
+        <h5>Database :</h5>
+        {test}
+      </div>
     
       </>
 
