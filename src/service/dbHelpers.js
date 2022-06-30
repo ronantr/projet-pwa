@@ -6,6 +6,7 @@ import {
   query,
   orderBy,
   onSnapshot,
+  getDocs,
 } from "firebase/firestore";
 
 export const addPresentation = async (data) => {
@@ -21,16 +22,24 @@ export const addPresentation = async (data) => {
   }
 };
 
-export const getPresentations = () => {
-  const q = query(collection(db, "presentations"), orderBy("created", "desc"));
-  let data;
-  onSnapshot(q, (querySnapshot) => {
-    data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      data: doc.data(),
-    }));
-  });
-  console.log(data);
+export const getPresentations = async () => {
+  // const q = query(collection(db, "presentations"), orderBy("created", "desc"));
+  // let data;
+  // onSnapshot(q, (querySnapshot) => {
+  //   data = querySnapshot.docs.map((doc) => ({
+  //     id: doc.id,
+  //     data: doc.data(),
+  //   }));
+  // });
 
-  return data;
+  const col = collection(db, "presentations");
+  const snapshot = await getDocs(col);
+  const presentationList = snapshot.docs.map((doc) => doc.data());
+
+  // snapshot => {
+  //   // let fetchData= [];
+  //   // fetchData.push(snapshot.val());
+  //   // setData({fetchData});
+  //   // });
+  return presentationList;
 };

@@ -8,8 +8,8 @@ import {addPresentation,getPresentations} from '../service/dbHelpers'
 
 function Home({user}) {
     const [inputTitle, setInputTitle] = useState('');
-    const [presentations, setPresentations] = useState([])
-    const[test, setTest] = useState('')
+    const [presentations, setPresentations] = useState([{}])
+    // const[test, setTest] = useState([{}])
     const [showForm, setShowForm] = useState(false)
     const handleAddPresentation = () => {
     setShowForm(true)
@@ -20,7 +20,16 @@ function Home({user}) {
     }
 
     const handleSubmitAddPresentation = async () => {
-        setPresentations([...presentations,inputTitle])
+        // setPresentations(...presentations,{
+        //     title: inputTitle,
+        //     author: {
+        //         name: user.displayName,
+        //         email: user.email,
+        //     },
+        //     editor: [
+        //         {}
+        //     ],
+        //   })
         addPresentation(
             {
                 title: inputTitle,
@@ -37,8 +46,22 @@ function Home({user}) {
     }
       
 useEffect(() => {
-    setTest(getPresentations())
-}, []);
+    // declare the async data fetching function
+    const fetchData = async () => {
+      let data =await getPresentations()
+      setPresentations(data)
+    };
+  
+    fetchData()
+
+// firebase.database().ref().on("value", snapshot => {
+// let fetchData= [];
+// fetchData.push(snapshot.val());
+// setData({fetchData});
+// });
+
+
+  }, [])
 
   return (
       <>
@@ -59,14 +82,14 @@ useEffect(() => {
         (presentations.length > 0) ?
 
         presentations.map((presentation,index) => 
-        <Presentation key={index} title={presentation} />
+        <Presentation key={index} title={presentation.title} />
         ) :""
         }
     </div>
       
       <div>
         <h5>Database :</h5>
-        {test}
+        {presentations.map((presentation,index) => <div key={index}><h6>{presentation.title}</h6></div>)}
       </div>
     
       </>
