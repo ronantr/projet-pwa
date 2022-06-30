@@ -1,11 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { auth } from './service/firebase';
+import {  onAuthStateChanged } from "firebase/auth";
+
 
 import "./App.css";
 import Home from "./components/Home";
 import Login from "./components/Login";
 //import GoogleLogin from "./components/GoogleLogin";
-import firebase from './service/firebase';
+//import './service/firebase';
 
 
 
@@ -13,7 +16,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    onAuthStateChanged(auth , user => {
       setUser(user);
     })
   }, [])
