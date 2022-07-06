@@ -5,6 +5,8 @@ import '../App.css';
 // import {Firebase} from '../service/firebase'
 import {db} from '../service/firebase'
 import {addPresentation,getPresentations} from '../service/dbHelpers'
+import { Col, Container, Row } from 'react-bootstrap';
+import CardPresentation from './CardPresentation';
 
 function Home({user}) {
     const [inputTitle, setInputTitle] = useState('');
@@ -75,18 +77,20 @@ useEffect(() => {
 
     <div>
         <button onClick={handleAddPresentation}>Add new Presentation</button>
-
         {showForm ? <> <input type="text" onChange={handleChangeTitle}/> <button onClick={handleSubmitAddPresentation}>Add</button></> : null}
-
-        {
+    </div>
+    <Container>
+  <Row>
+  {
         (presentations.length > 0) ?
-
         presentations.map((presentation,index) => 
-        <Presentation key={index} title={presentation.title} />
+        <Col sm={3} key={index}>
+            <CardPresentation title={presentation.title} url={`/presentation/${presentation.title}`}/>
+        </Col>
         ) :""
         }
-    </div>
-      
+  </Row>
+</Container>
       <div>
         <h5>Database :</h5>
         {presentations.map((presentation,index) => <div key={index}><h6>{presentation.title}</h6></div>)}
