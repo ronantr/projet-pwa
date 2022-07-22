@@ -1,29 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import Reveal from 'reveal.js';
 //import RevealMarkdown from "reveal.js/plugin/markdown/markdown.js";
 
 
 function Reval({title}) {
-    const deck = new Reveal();
-    deck.initialize();
-deck.on( 'make-it-pop', () => {
-        console.log('✨');
-      } )
+  useEffect (() => { 
+    let deck = new Reveal()
+    deck.initialize({center: true, controls: true })
+    Reveal.configure({ autoSlide: 0 })
+  },[]);
+
+
     return (
 
       <>
-      <div>reveal</div>
-      <div class="reveal">
-            <div class="slides">
-            <section data-state="make-it-pop"></section>
-                <section data-background-color="aquamarine">
+
+      <div className="reveal">
+            <div className="slides">
+                <section data-background-image="http://example.com/image.png">
                   <h2>🍦</h2>
                 </section>
-                <section data-background-color="rgb(70, 70, 255)">
+                <section data-background-image="http://example.com/image.png">
                   <h2>🍰</h2>
-                </section>
-                <section>
-                    <h2>🍩</h2>
                 </section>
             </div>
         </div>
