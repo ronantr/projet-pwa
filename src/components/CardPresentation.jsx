@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-function CardPresentation({title,url}) {
+function CardPresentation({title,url,link}) {
   return (
     <Card style={{ width: '18rem' }}>
   <Card.Img variant="top" src="https://via.placeholder.com/200" />
@@ -10,7 +10,7 @@ function CardPresentation({title,url}) {
     <Card.Title>{title}</Card.Title>
     <Link to={url}>View</Link>
 
-    //<Card.Link to={url}> Show</Card.Link>
+    <Link to={link} style={{marginLeft:"5px"}}>Show</Link>
   </Card.Body>
 </Card>
   )

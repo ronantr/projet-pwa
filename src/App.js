@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Presentation from "./components/Presentation";
 import Reval from "./components/Reval";
+import Text from "./components/RichTextEditor";
 //import GoogleLogin from "./components/GoogleLogin";
 //import './service/firebase';
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/presentation/">
             <Route path=":id" element={<Presentation />} />
           </Route>
+          <Route path="/text" element={<Text/>}/>
         </Routes>
       </div>
     </Router>

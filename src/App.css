@@ -52,3 +52,6 @@
 .reveal{
   position: absolute;
 }
+.quill > .ql-toolbar:first-child {
+  display: none !important;
+}

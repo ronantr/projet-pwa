@@ -47,7 +47,6 @@ const classes = {
   }
 function Presentation({title}) {
   const [slide, setSlide] = useState(slides[0]);
-
   return (
   <Container fluid >
 
