@@ -12,6 +12,7 @@ import {
   getDoc,
   FieldPath,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 export const addPresentation = async (data) => {
@@ -37,23 +38,26 @@ export const addPresentation = async (data) => {
 };
 export const addSlide = async (data) => {
   try {
-    await addDoc(collection(db, "slides", data.idPresentation, "slides"), {
-      content: "",
-      background: "",
-      editor: data.editor,
-      created: Timestamp.now(),
-      updated: Timestamp.now(),
-    });
+    const da = await addDoc(
+      collection(db, "presentations", data.idPresentation, "slides"),
+      {
+        content: "",
+        background: "",
+        editor: data.editor,
+        created: Timestamp.now(),
+        updated: Timestamp.now(),
+      }
+    );
+    console.log(da.id);
   } catch (err) {
     alert(err);
   }
 };
 
-export const deleteSlide = async (data) => {
+export const deleteSlide = async (presentationId, slideId) => {
   try {
-    await doc(
-      collection(db, "slides", data.idPresentation, "slides", data.idSlide)
-    ).delete();
+    const docRef = doc(db, "presentations", presentationId, "slides", slideId);
+    await deleteDoc(docRef);
   } catch (err) {
     alert(err);
   }

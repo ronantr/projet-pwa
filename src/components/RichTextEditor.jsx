@@ -3,7 +3,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import { Button } from 'react-bootstrap';
-import { updateSlide } from '../service/dbHelpers';
+import { deleteSlide, updateSlide } from '../service/dbHelpers';
 import { useRef } from 'react';
 
 
@@ -46,11 +46,17 @@ function RichTextEditor({item,presentationId}) {
 		console.log(presentationId)
     await updateSlide(presentationId, item.id , {"content":editorRef.current.value})
   }
+
+  const handleDelete = async ()=>  {
+	console.log(presentationId)
+	await deleteSlide(presentationId, item.id);
+}
   
 
 	    return (
 	      <div>
     <Button onClick={handleSave}>Save</Button>
+    <Button onClick={handleDelete} variant='danger'>Delete</Button>
 
 	        <ReactQuill theme="snow"  modules={modules}
 				formats={formats} onChange={rteChange} ref={editorRef}

@@ -88,11 +88,22 @@ function Presentation() {
   
   }, [idPresentation])
 
+
+  const handleAddSlide = async () => {
+    const data ={
+      idPresentation: idPresentation,
+      editor: "editor@test.com"
+    }
+    await addSlide(data);
+  }
+
+
   return (
   <Container fluid >
     {!isLoading && slides && currentSlide &&
     <Row style={classes.container}>
       <Col sm={2} style={classes.slideList}>
+        <Button onClick={handleAddSlide}>ADD SLIDE</Button>
       {
           slides.map(item => <CardSlide key={item.id} item={item} setSlide={setCurrentSlide} />)
         }
