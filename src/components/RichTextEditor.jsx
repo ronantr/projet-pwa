@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link
+  } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import { Button } from 'react-bootstrap';
 import { deleteSlide, updateSlide } from '../service/dbHelpers';
 import { useRef } from 'react';
+import App from '../App.css';
 
 
 function RichTextEditor({item,presentationId}) {
@@ -54,14 +61,20 @@ function RichTextEditor({item,presentationId}) {
   
 
 	    return (
-	      <div>
-    <Button onClick={handleSave}>Save</Button>
-    <Button onClick={handleDelete} variant='danger'>Delete</Button>
-
-	        <ReactQuill theme="snow"  modules={modules}
-				formats={formats} onChange={rteChange} ref={editorRef}
-			value={item.content}/>
-	      </div>
+			<>
+				<div class="backPresentation">
+					<Link to="/">
+						<span class="back">Retour</span>
+					</Link>
+					<span class="save" onClick={handleSave}>Enregistrer</span>
+					<span class="delete" onClick={handleDelete} variant='danger'>Supprimer</span>
+				</div>
+				<div>
+					<ReactQuill theme="snow"  modules={modules}
+						formats={formats} onChange={rteChange} ref={editorRef}
+						value={item.content}/>
+				</div>
+			</>
 	    );
 
 }

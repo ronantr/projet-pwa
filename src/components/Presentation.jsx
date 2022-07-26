@@ -103,7 +103,7 @@ function Presentation() {
     {!isLoading && slides && currentSlide &&
     <Row style={classes.container}>
       <Col sm={2} style={classes.slideList}>
-        <Button onClick={handleAddSlide}>ADD SLIDE</Button>
+        <button class="add" onClick={handleAddSlide}>Ajouter</button>
       {
           slides.map(item => <CardSlide key={item.id} item={item} setSlide={setCurrentSlide} />)
         }
