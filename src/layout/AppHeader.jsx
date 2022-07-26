@@ -18,9 +18,22 @@ export default function AppHeader ({user}) {
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
           }
-              
-          {user && user.displayName}
+          
+          {user && 
 
+              <Nav.Link href="#" disabled>
+                {user.displayName}
+              </Nav.Link>
+            
+          }
+          {user && 
+            <div className="d-flex">
+                <LinkContainer to="/logout" >
+                  <Nav.Link>Logout</Nav.Link>
+                </LinkContainer>
+            </div>
+          }
+          
           </Nav>
         </Container>
       </Navbar>
