@@ -87,15 +87,17 @@ useEffect(() => {
         {showForm ? <> <input type="text" onChange={handleChangeTitle}/> <Button variant="success" onClick={handleSubmitAddPresentation}>Add</Button></> : null}
     </div>
     <Container>
-  <Row>
+  <Row style={{justifyContent: 'space-around'}}>
+    
   {
         (presentations.length > 0) ?
         presentations.map((presentation,index) => 
-        <Col sm={3} key={index} style={{marginBottom: '4em'}}>
+        <Col sm={3} key={index} style={{marginBottom: '4em',width:'auto'}}>
             <CardPresentation title={presentation.title} url={`/presentation/${presentation.title}`} link={`/reval/${presentation.title}`}/>
         </Col>
         ) :""
         }
+    
   </Row>
 </Container>
       <div>
