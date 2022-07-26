@@ -14,7 +14,6 @@ function Slide({item}) {
   
   return (
     <section data-background-image={item.url}>
-        <h1>{item.title}</h1>
         <RichTextEditor content ={item.content} setContent={setContent}/>
     </section>
   )

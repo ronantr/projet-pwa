@@ -38,7 +38,7 @@ function Reval({}) {
                 <>
                    <section data-background-image="https://images7.alphacoders.com/116/1162253.jpg">
         <h2>{item.title}</h2>
-        {item.content} nex
+        {item.content} 
         </section>
                 </>)}
 
