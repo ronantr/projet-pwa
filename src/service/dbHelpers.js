@@ -9,6 +9,8 @@ import {
   where,
   getDocs,
   doc,
+  getDoc,
+  FieldPath,
 } from "firebase/firestore";
 
 export const addPresentation = async (data) => {
@@ -51,12 +53,12 @@ export const getPresentation = async (title) => {
   querySnapshot.forEach((doc) => {
     //console.log(docq.id, " => ", docq.data());
     const ids = doc.id;
-    const presentation = {...doc.data(),id : doc.id};
-    //if (presentation === undefined) { return null; } return presentation; 
-    //console.log({ids,...docq.data()}); 
+    const presentation = { ...doc.data(), id: doc.id };
+    //if (presentation === undefined) { return null; } return presentation;
+    //console.log({ids,...docq.data()});
     return presentation;
-    
-  });};
+  });
+};
 export const updatePresentation = async (data) => {
   try {
     await addDoc(collection(db, "presentations"), {
@@ -66,4 +68,69 @@ export const updatePresentation = async (data) => {
     // onClose()
   } catch (err) {
     alert(err);
-  }};
+  }
+};
+
+export const deletePresentation = async (id) => {
+  try {
+    await doc(collection(db, "presentations"), id).delete();
+    // onClose()
+  } catch (err) {
+    alert(err);
+  }
+};
+
+// firebase get slides collection inside presentation document
+
+// export const getSlideById = async (presentationId, slideId) => {
+//   /************************** */
+
+//   const docRef = collection(db, "presentations", presentationId, "slides");
+//   const querySnapshot = await getDocs(docRef);
+//   querySnapshot.forEach((doc) => {
+//     //console.log(docq.id, " => ", docq.data());
+//     const ids = doc.id;
+//     const presentation = { ...doc.data(), id: doc.id };
+//     //if (presentation === undefined) { return null; } return presentation;
+//     console.log(presentation);
+//     return presentation;
+//   });
+//   // console.log(await doc(db, "presentations", presentationId));
+
+//   /************************** */
+//   /*
+//   const docRef = doc(db, "presentations", presentationId);
+//   const docSnap = await getDoc(docRef);
+//   console.log(docSnap.collection("slides"), docSnap.id);
+// */
+
+//   /************************ */
+// };
+
+export const getAllSlides = async (presentationId) => {
+  const docRef = collection(db, "presentations", presentationId, "slides");
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    const slides = { ...doc.data(), id: doc.id };
+    if (slides === undefined) {
+      return null;
+    }
+    return slides;
+  });
+};
+
+export const getSlide = async (presentationId, slideId) => {
+  const docRef = collection(
+    db,
+    "presentations",
+    presentationId,
+    "slides",
+    slideId
+  );
+  const docSnap = await getDoc(docRef);
+  const slide = { ...docSnap.data(), id: docSnap.id };
+  if (slide === undefined) {
+    return null;
+  }
+  return slide;
+};
