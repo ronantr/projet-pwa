@@ -16,8 +16,17 @@ import {
 
 export const addPresentation = async (data) => {
   try {
-    await addDoc(collection(db, "presentations"), {
+    const idPresentation = await addDoc(collection(db, "presentations"), {
       ...data,
+      created: Timestamp.now(),
+      updated: Timestamp.now(),
+    });
+    console.log(idPresentation.id);
+    await addDoc(collection(db, "presentations", idPresentation.id, "slides"), {
+      content: "",
+      background: "",
+      author: data.author.email,
+      editor: data.author.email,
       created: Timestamp.now(),
       updated: Timestamp.now(),
     });
@@ -28,8 +37,10 @@ export const addPresentation = async (data) => {
 };
 export const addSlide = async (data) => {
   try {
-    await addDoc(collection(db, "slides"), {
-      ...data,
+    await addDoc(collection(db, "slides", data.idPresentation, "slides"), {
+      content: "",
+      background: "",
+      editor: data.editor,
       created: Timestamp.now(),
       updated: Timestamp.now(),
     });
@@ -37,6 +48,17 @@ export const addSlide = async (data) => {
     alert(err);
   }
 };
+
+export const deleteSlide = async (data) => {
+  try {
+    await doc(
+      collection(db, "slides", data.idPresentation, "slides", data.idSlide)
+    ).delete();
+  } catch (err) {
+    alert(err);
+  }
+};
+
 export const getPresentations = async () => {
   const col = collection(db, "presentations");
   const snapshot = await getDocs(col);
@@ -149,8 +171,18 @@ export const updateSlide = async (presentationId, slideId, data) => {
 
     await updateDoc(slideRef, {
       ...data,
+      updated: Timestamp.now(),
     });
   } catch (err) {
     alert(err);
   }
 };
+
+// export const updateSlide = async (data) => {
+//   try {
+//     await doc(collection(db, "slides",data.idPresentation,"slides",data.idSlide)).update({
+//       content: data.content,
+//       background: data.background,
+//       editor: data.editor,
+//       updated: Timestamp.now() });
+//   } catch (err) { alert(err); }}
