@@ -35,7 +35,9 @@ function RichTextEditor({item,presentationId}) {
 
         const rteChange = (content, delta, source, editor) => {
 			// setContent(editor.getHTML());
+			if(editorRef.current) {
 			editorRef.current.value = editor.getHTML();
+			}
 		// console.log(editor.getHTML()); // rich text
 		// console.log(editor.getLength()); // number of characters
 	}
