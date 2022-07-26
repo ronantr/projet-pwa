@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link
+  } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
+import './richTextEditor.css';
 
 
 function RichTextEditor({content,setContent}) {
@@ -35,12 +42,21 @@ function RichTextEditor({content,setContent}) {
 	}
     console.log("text")
 
-	    return (
-	      <div>
-	        <ReactQuill theme="snow"  modules={modules}
+	return (
+		<>
+		<div class="backPresentation">
+			<Link to="/">
+			<span class="back">Retour</span>
+			</Link>
+		</div>
+		<section className="container">
+			<div class="richEdit">
+			<ReactQuill theme="snow"  modules={modules}
 				formats={formats} onChange={rteChange}
 			value={comments || ''}/>
-	      </div>
+			</div>
+		</section>	
+		</>
 	    );
 
 }

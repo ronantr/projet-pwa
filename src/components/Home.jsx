@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Presentation from './Presentation'
+import Presentation from './presentation/Presentation'
 import { auth } from '../service/firebase'
 import '../App.css';
 // import {Firebase} from '../service/firebase'

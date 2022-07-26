@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import RichTextEditor from './RichTextEditor'
-import {setPresentation} from '../service/dbHelpers'
+import RichTextEditor from '../../components/richTextEditor/RichTextEditor'
+import {setPresentation} from '../../service/dbHelpers'
+import './slide.css'
 
 function Slide({item}) {
   //    console.log(item)
@@ -12,7 +13,7 @@ function Slide({item}) {
 
   }
   return (
-    <section data-background-image={item.url}>
+    <section data-background-image={item.url} class="slide">
         <h1>{item.title}</h1>
         <RichTextEditor content ={item.content} setContent={setContent}/>
     </section>

@@ -1,0 +1,67 @@
+.richEdit{
+    width: 75%;
+    height: 75%;
+    margin: auto;
+    box-shadow: 0 0 10px rgb(180, 180, 180);
+    border-radius: 10px;
+    padding: 10px;
+    overflow: auto;
+    background-color: #fff;
+}
+
+.container {
+    width: 80%;
+    height: 80%;
+    margin: 5% auto;
+    display: flex;
+    border-radius: 10px;
+    background-color: rgb(223, 223, 223);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ql-editor{
+    min-height:370px;
+}
+
+.backPresentation{
+    /* add css to align button to the left */
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+}
+
+.back{
+    /* add class to the button with shadow */
+    background-color: rgb(3, 121, 194);
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    color: rgb(210, 210, 210);
+    text-decoration: none;
+}
+
+
+a:link { text-decoration: none; }
+
+a:visited { text-decoration: none; }
+
+a:active { text-decoration: none; }
+
+.back:hover{
+    /* add hover style on button with transition */
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: all 0.3s ease-in-out;
+}

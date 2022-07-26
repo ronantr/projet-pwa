@@ -7,10 +7,10 @@ import "reveal.js/dist/reveal.css";
 import "reveal.js/dist/theme/white.css";
 import "./App.css";
 import Home from "./components/Home";
-import Login from "./components/Login";
-import Presentation from "./components/Presentation";
+import Login from "./components/login/Login";
+import Presentation from "./components/presentation/Presentation";
 import Reval from "./components/Reval";
-import Text from "./components/RichTextEditor";
+import Text from "./components/richTextEditor/RichTextEditor";
 //import GoogleLogin from "./components/GoogleLogin";
 //import './service/firebase';
 

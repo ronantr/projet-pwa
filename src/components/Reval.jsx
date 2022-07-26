@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Reveal from 'reveal.js';
 //import RevealMarkdown from "reveal.js/plugin/markdown/markdown.js";
 import { useParams } from "react-router-dom";
-import Slide from './Slide';
+import Slide from './slide/Slide';
 import {getPresentation} from '../service/dbHelpers'
 
 function Reval({}) {
@@ -32,7 +32,6 @@ function Reval({}) {
       <div className="reveal">
             <div className="slides">
               {presentation.map(item => <Slide key={item.id} item ={item}/>)}
-
             </div>
       </div>
        </>

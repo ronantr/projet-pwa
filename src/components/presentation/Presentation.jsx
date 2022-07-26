@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
-import CardSlide from './CardSlide'
-import Slide from './Slide'
+import CardSlide from '../cardSlide/CardSlide'
+import Slide from '../slide/Slide'
+import './presentation.css'
 
 const slides =[{
   title: 'Slide 1',
