@@ -33,7 +33,6 @@ function RichTextEditor({content,setContent}) {
 		console.log(editor.getHTML()); // rich text
 		console.log(editor.getLength()); // number of characters
 	}
-    console.log("text")
 
 	    return (
 	      <div>

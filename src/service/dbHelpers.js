@@ -25,7 +25,17 @@ export const addPresentation = async (data) => {
     alert(err);
   }
 };
-
+export const addSlide = async (data) => {
+  try {
+    await addDoc(collection(db, "slides"), {
+      ...data,
+      created: Timestamp.now(),
+      updated: Timestamp.now(),
+    });
+  } catch (err) {
+    alert(err);
+  }
+};
 export const getPresentations = async () => {
   // const q = query(collection(db, "presentations"), orderBy("created", "desc"));
   // let data;
@@ -50,14 +60,16 @@ export const getPresentation = async (title) => {
   const docRef = collection(db, "presentations");
   const docq = query(docRef, where("title", "==", title));
   const querySnapshot = await getDocs(docq);
+  const presentation = [];
   querySnapshot.forEach((doc) => {
-    //console.log(docq.id, " => ", docq.data());
+    console.log(doc.id, " => ", doc.data());
     const ids = doc.id;
-    const presentation = { ...doc.data(), id: doc.id };
+    presentation.push({ ...doc.data(), id: doc.id });
     //if (presentation === undefined) { return null; } return presentation;
     //console.log({ids,...docq.data()});
-    return presentation;
+    //return presentation;
   });
+  return presentation;
 };
 export const updatePresentation = async (data) => {
   try {
