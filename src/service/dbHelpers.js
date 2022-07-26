@@ -11,6 +11,7 @@ import {
   doc,
   getDoc,
   FieldPath,
+  updateDoc,
 } from "firebase/firestore";
 
 export const addPresentation = async (data) => {
@@ -133,4 +134,23 @@ export const getSlide = async (presentationId, slideId) => {
     return null;
   }
   return slide;
+};
+
+export const updateSlide = async (presentationId, slideId, data) => {
+  console.log(presentationId, slideId, data);
+  try {
+    const slideRef = doc(
+      db,
+      "presentations",
+      presentationId,
+      "slides",
+      slideId
+    );
+
+    await updateDoc(slideRef, {
+      ...data,
+    });
+  } catch (err) {
+    alert(err);
+  }
 };

@@ -94,11 +94,11 @@ function Presentation() {
     <Row style={classes.container}>
       <Col sm={2} style={classes.slideList}>
       {
-          slides.map(item => <CardSlide key={item.id} item={item} setSlide={setCurrentSlide}/>)
+          slides.map(item => <CardSlide key={item.id} item={item} setSlide={setCurrentSlide} />)
         }
       </Col>
       <Col sm={10}>
-       <Slide item={currentSlide} />
+       <Slide item={currentSlide} presentationId={idPresentation} />
       </Col>
     </Row>
 }

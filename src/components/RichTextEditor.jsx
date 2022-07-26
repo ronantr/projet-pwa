@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
+import { Button } from 'react-bootstrap';
+import { updateSlide } from '../service/dbHelpers';
+import { useRef } from 'react';
 
 
-function RichTextEditor({content,setContent}) {
+function RichTextEditor({item,presentationId}) {
 
+	const editorRef = useRef(null);
 		 const modules = {
 			toolbar: [
 		      [{ 'font': [] }],
@@ -26,19 +30,29 @@ function RichTextEditor({content,setContent}) {
 		    'align',
 		    'color', 'background'
 	  	];
-        const [comments, setComments] = React.useState('');
+        // const [content, setContent] = React.useState('');
 	
 
         const rteChange = (content, delta, source, editor) => {
-		console.log(editor.getHTML()); // rich text
-		console.log(editor.getLength()); // number of characters
+			// setContent(editor.getHTML());
+			editorRef.current.value = editor.getHTML();
+		// console.log(editor.getHTML()); // rich text
+		// console.log(editor.getLength()); // number of characters
 	}
+
+	  const handleSave = async ()=>  {
+		console.log(presentationId)
+    await updateSlide(presentationId, item.id , {"content":editorRef.current.value})
+  }
+  
 
 	    return (
 	      <div>
+    <Button onClick={handleSave}>Save</Button>
+
 	        <ReactQuill theme="snow"  modules={modules}
-				formats={formats} onChange={rteChange}
-			value={comments || ''}/>
+				formats={formats} onChange={rteChange} ref={editorRef}
+			value={item.content}/>
 	      </div>
 	    );
 
