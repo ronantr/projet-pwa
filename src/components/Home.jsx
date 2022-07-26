@@ -100,10 +100,10 @@ useEffect(() => {
     
   </Row>
 </Container>
-      <div>
+      {/* <div>
         <h5>Database :</h5>
         {presentations.map((presentation,index) => <div key={index}><h6>{presentation.title}</h6></div>)}
-      </div>
+      </div> */}
     
       </>
 
