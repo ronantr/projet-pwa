@@ -21,6 +21,7 @@ export const addPresentation = async (data) => {
     console.log(idPresentation.id);
     await addDoc(collection(db, "presentations",idPresentation.id,"slides"), {
       content: "",
+      background: "",
       author: data.author.email,
       editor: data.author.email,
       created: Timestamp.now(),
@@ -35,6 +36,7 @@ export const addSlide = async (data) => {
   try {
     await addDoc(collection(db, "slides",data.idPresentation,"slides"), {
       content: "",
+      background: "",
       editor: data.editor,
       created: Timestamp.now(),
       updated: Timestamp.now(),
@@ -43,6 +45,7 @@ export const updateSlide = async (data) => {
   try {
     await doc(collection(db, "slides",data.idPresentation,"slides",data.idSlide)).update({  
       content: data.content, 
+      background: data.background,
       editor: data.editor, 
       updated: Timestamp.now() });
   } catch (err) { alert(err); }}
