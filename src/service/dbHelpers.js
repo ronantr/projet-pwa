@@ -13,8 +13,16 @@ import {
 
 export const addPresentation = async (data) => {
   try {
-    await addDoc(collection(db, "presentations"), {
+    const idPresentation = await addDoc(collection(db, "presentations"), {
       ...data,
+      created: Timestamp.now(),
+      updated: Timestamp.now(),
+    });
+    console.log(idPresentation.id);
+    await addDoc(collection(db, "presentations",idPresentation.id,"slides"), {
+      content: "",
+      author: data.author.email,
+      editor: data.author.email,
       created: Timestamp.now(),
       updated: Timestamp.now(),
     });
@@ -25,11 +33,24 @@ export const addPresentation = async (data) => {
 };
 export const addSlide = async (data) => {
   try {
-    await addDoc(collection(db, "slides"), {
-      ...data,
+    await addDoc(collection(db, "slides",data.idPresentation,"slides"), {
+      content: "",
+      editor: data.editor,
       created: Timestamp.now(),
       updated: Timestamp.now(),
     });} catch (err) { alert(err); }}
+export const updateSlide = async (data) => {
+  try {
+    await doc(collection(db, "slides",data.idPresentation,"slides",data.idSlide)).update({  
+      content: data.content, 
+      editor: data.editor, 
+      updated: Timestamp.now() });
+  } catch (err) { alert(err); }}
+export const deleteSlide = async (data) => {
+  try {
+    await doc(collection(db, "slides",data.idPresentation,"slides",data.idSlide)).delete();
+  } catch (err) { alert(err); }}
+
 export const getPresentations = async () => {
   // const q = query(collection(db, "presentations"), orderBy("created", "desc"));
   // let data;
