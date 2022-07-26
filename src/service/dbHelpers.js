@@ -37,23 +37,10 @@ export const addSlide = async (data) => {
   }
 };
 export const getPresentations = async () => {
-  // const q = query(collection(db, "presentations"), orderBy("created", "desc"));
-  // let data;
-  // onSnapshot(q, (querySnapshot) => {
-  //   data = querySnapshot.docs.map((doc) => ({
-  //     id: doc.id,
-  //     data: doc.data(),
-  //   }));
-  // });
-
   const col = collection(db, "presentations");
   const snapshot = await getDocs(col);
   const presentationList = snapshot.docs.map((doc) => doc.data());
-  // snapshot => {
-  //   // let fetchData= [];
-  //   // fetchData.push(snapshot.val());
-  //   // setData({fetchData});
-  //   // });
+
   return presentationList;
 };
 export const getPresentation = async (title) => {
@@ -62,7 +49,7 @@ export const getPresentation = async (title) => {
   const querySnapshot = await getDocs(docq);
   const presentation = [];
   querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
+    // console.log(doc.id, " => ", doc.data());
     const ids = doc.id;
     presentation.push({ ...doc.data(), id: doc.id });
     //if (presentation === undefined) { return null; } return presentation;
@@ -120,15 +107,16 @@ export const deletePresentation = async (id) => {
 // };
 
 export const getAllSlides = async (presentationId) => {
+  console.log(presentationId);
   const docRef = collection(db, "presentations", presentationId, "slides");
   const querySnapshot = await getDocs(docRef);
+  const slides = [];
   querySnapshot.forEach((doc) => {
-    const slides = { ...doc.data(), id: doc.id };
-    if (slides === undefined) {
-      return null;
-    }
-    return slides;
+    console.log({ ...doc.data(), id: doc.id });
+    slides.push({ ...doc.data(), id: doc.id });
   });
+  console.log(slides);
+  return slides;
 };
 
 export const getSlide = async (presentationId, slideId) => {

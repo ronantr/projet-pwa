@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
-import { addSlide } from '../service/dbHelpers'
+import { useParams } from 'react-router-dom'
+import { addSlide, getAllSlides, getPresentation } from '../service/dbHelpers'
 import CardSlide from './CardSlide'
 import Slide from './Slide'
 
@@ -29,49 +30,7 @@ import Slide from './Slide'
   )
 }*/
 
-const slides =[{
-  title: 'Slide 1',
-  content:'',
-},
-{
-  title: 'Slide 2',
-  content:'',
-},
-{
-  title: 'Slide 3',
-  content:'',
-},
-{
-  title: 'Slide 4',
-  content:'',
 
-},
-{
-  title: 'Slide 5',
-  content:'',
-},
-{
-  title: 'Slide 6',
-  content:'',
-},
-{
-  title: 'Slide 7',
-  content:'',
-},
-{
-  title: 'Slide 8',
-  content:'',
-},
-{
-  title: 'Slide 9',
-  content:'',
-},
-{
-  title: 'Slide 10',
-  content:'',
-},
-
-]
 const classes = {
     container: {
       overflow: 'hidden',
@@ -87,21 +46,62 @@ const classes = {
  // <button onClick={handleAddSlide}>Add new Slide</button>
  // {showForm ? <> <input type="text" onChange={handleChangeConent}/> <button onClick={handleSubmitAddSlide}>Add</button></> : null}
 //</div>
-function Presentation({title}) {
-  const [slide, setSlide] = useState(slides[0]);
+function Presentation() {
+
+  const [isLoading, setIsLoading] = useState(true)
+  const titlePresentation= useParams().id
+  const [slides, setSlides] = useState();
+  const [currentSlide, setCurrentSlide] = useState(null);
+  const [idPresentation, setIdPresentation] = useState(null);
+
+
+
+
+  useEffect(() => {
+
+    const getIdPresentation = async (title) => {
+      let data =await getPresentation(title);
+      data.map(item => {
+        setIdPresentation(item.id)
+        console.log(item.id)
+      })
+    } 
+    setIsLoading(true)
+    getIdPresentation(titlePresentation)
+    setIsLoading(false)
+  
+  }, [])
+
+  useEffect(() => {
+    const getSlides = async (idPresentation) => {
+      console.log(idPresentation)
+      let data =await getAllSlides(idPresentation);
+      setSlides(data)
+      setCurrentSlide(data[0])
+      console.log(data[0])
+    };
+    setIsLoading(true)
+    if(idPresentation) {
+      getSlides(idPresentation)
+    }
+    setIsLoading(false)
+  
+  }, [idPresentation])
+
   return (
   <Container fluid >
-
+    {!isLoading && slides && currentSlide &&
     <Row style={classes.container}>
       <Col sm={2} style={classes.slideList}>
       {
-          slides.map(item => <CardSlide key={item} item={item} setSlide={setSlide}/>)
+          slides.map(item => <CardSlide key={item.id} item={item} setSlide={setCurrentSlide}/>)
         }
       </Col>
       <Col sm={10}>
-       <Slide item={slide} />
+       <Slide item={currentSlide} />
       </Col>
     </Row>
+}
   </Container>
   )
 }
