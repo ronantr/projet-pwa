@@ -55,3 +55,8 @@
 .quill > .ql-toolbar:first-child {
   display: none !important;
 }
+
+
+.reveal .controls .controls-arrow:after, .reveal .controls .controls-arrow:before{
+  top: -50px;
+}

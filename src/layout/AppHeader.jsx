@@ -1,7 +1,8 @@
 import React from "react"
-import { Navbar,Container, Nav } from "react-bootstrap"
+import { Navbar,Container, Nav, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { LinkContainer } from "react-router-bootstrap"
+import { auth } from "../service/firebase"
+// import { LinkContainer } from "react-router-bootstrap"
 // import Container from 'react-bootstrap/Container';
 // import Nav from 'react-bootstrap/Nav';
 
@@ -14,9 +15,7 @@ export default function AppHeader ({user}) {
           <Navbar.Brand href="#">PWA</Navbar.Brand>
           <Nav className="me-auto">
           {!user && 
-            <LinkContainer to="/login" >
-              <Nav.Link>Login</Nav.Link>
-            </LinkContainer>
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
           }
           
           {user && 
@@ -28,9 +27,8 @@ export default function AppHeader ({user}) {
           }
           {user && 
             <div className="d-flex">
-                <LinkContainer to="/logout" >
-                  <Nav.Link>Logout</Nav.Link>
-                </LinkContainer>
+              <Button varaint="secondaary" className="button signout" onClick={() => auth.signOut()}>Sign out</Button>
+                  {/* <Nav.Link as={Link} to="/logout">Logout</Nav.Link> */}
             </div>
           }
           
