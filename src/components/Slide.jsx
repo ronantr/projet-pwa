@@ -11,6 +11,7 @@ function Slide({item}) {
     setContent(e)
 
   }
+  
   return (
     <section data-background-image={item.url}>
         <h1>{item.title}</h1>
