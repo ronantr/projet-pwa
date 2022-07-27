@@ -100,12 +100,14 @@ label {
 
 /*CardSlide*/
 
-.cardSlide{
-  width: 200px;
-  height: 130px;
+.slides-list .cardSlide{
+  /* width: 200px;
+  height: 130px; */
+  /* width: 80%; */
+  /* height: 100%; */
   border-radius: 10px;
   margin-top: 10px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   margin-bottom: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
   display: flex;
@@ -113,6 +115,8 @@ label {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  background-color: #fff !important;
+  
   
 }
 
@@ -121,10 +125,13 @@ label {
   transition: all 0.3s ease-in-out;
 }
 
-.card{
+.slides-list .card{
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  height: 150px;
+  padding: 10px;
+  background-color:#d5f4e6;
   
 }
 
@@ -163,7 +170,7 @@ label {
   background-color: #fff;
 }
 
-.container {
+/* .container {
   width: 80%;
   height: 80%;
   margin: 5% auto;
@@ -173,7 +180,7 @@ label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .ql-editor{
   min-height:70vh;  
@@ -287,4 +294,7 @@ a:active { text-decoration: none; }
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
   transition: all 0.3s ease-in-out;
   
+}
+.reveal .controls .controls-arrow:after, .reveal .controls .controls-arrow:before{
+  top: -50px;
 }

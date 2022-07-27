@@ -101,7 +101,7 @@ function Presentation() {
   return (
   <Container fluid >
     {!isLoading && slides && currentSlide &&
-    <Row style={classes.container}>
+    <Row style={classes.container} className="slides-list">
       <Col sm={2} style={classes.slideList}>
         <button class="add" onClick={handleAddSlide}>Ajouter</button>
       {

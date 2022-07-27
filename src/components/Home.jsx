@@ -7,6 +7,7 @@ import {db} from '../service/firebase'
 import {addPresentation,getPresentations} from '../service/dbHelpers'
 import { Col, Container, Row } from 'react-bootstrap';
 import CardPresentation from './CardPresentation';
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -71,35 +72,38 @@ useEffect(() => {
       <>
       <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css"/>
 <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/black.css"/>
-       <h1>Hello, <span></span>{user.displayName}</h1>
+       {/* <h1>Hello, <span></span>{user.displayName}</h1>
     <h2>{user.email}</h2>
-    <h2>{user.uid}</h2>
+    <h2>{user.uid}</h2> */}
     
-    <img src={user.photoURL} alt="" />
-    <p></p>
-    <button className="button signout" onClick={() => auth.signOut()}>Sign out</button>
+    {/* <img src={user.photoURL} alt="" /> */}
+    {/* <p></p>
+    <button className="button signout" onClick={() => auth.signOut()}>Sign out</button> */}
 
-
-    <div>
-        <button onClick={handleAddPresentation}>Add new Presentation</button>
-        {showForm ? <> <input type="text" onChange={handleChangeTitle}/> <button onClick={handleSubmitAddPresentation}>Add</button></> : null}
+    <h1> Slides </h1>
+    <div style={{marginBottom: '25px'}}> 
+ 
+        <Button variant="secondary" onClick={handleAddPresentation}>Add new Presentation</Button>{' '}
+        {showForm ? <> <input type="text" onChange={handleChangeTitle}/> <Button variant="success" onClick={handleSubmitAddPresentation}>Add</Button></> : null}
     </div>
     <Container>
-  <Row>
+  <Row style={{justifyContent: 'space-around'}}>
+    
   {
         (presentations.length > 0) ?
         presentations.map((presentation,index) => 
-        <Col sm={3} key={index}>
+        <Col sm={3} key={index} style={{marginBottom: '4em',width:'auto'}}>
             <CardPresentation title={presentation.title} url={`/presentation/${presentation.title}`} link={`/reval/${presentation.title}`}/>
         </Col>
         ) :""
         }
+    
   </Row>
 </Container>
-      <div>
+      {/* <div>
         <h5>Database :</h5>
         {presentations.map((presentation,index) => <div key={index}><h6>{presentation.title}</h6></div>)}
-      </div>
+      </div> */}
     
       </>
 
