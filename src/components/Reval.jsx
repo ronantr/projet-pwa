@@ -69,21 +69,22 @@ function Reval() {
     return (
 
       <>
-
+      <div className="div-presentation">
       <div className="reveal">
             <div className="slides">
          
               {slides && slides.map(item => 
                 <>
-                   <section data-background-image="https://images7.alphacoders.com/116/1162253.jpg">
+                   {/* <section data-background-image="https://images7.alphacoders.com/116/1162253.jpg"> */}
                    {/* <section data-background-image={item.background}> */}
-                   {/* <section data-background-color="#d5f4e6"> */}
+                   <section data-background-color="#d5f4e6">
 
                    <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
         </section>
                 </>)}
 
             </div>
+      </div>
       </div>
        </>
     )

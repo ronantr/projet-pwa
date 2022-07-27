@@ -295,6 +295,24 @@ a:active { text-decoration: none; }
   transition: all 0.3s ease-in-out;
   
 }
+
+
+.reveal{
+position: relative;
+  /* top: 10;
+  left: 10;
+  right: 10;
+  bottom: 10; */
+  right: 10px;
+  left: 10px;
+  width: 100vw;
+  height: 100vh;
+  padding: 50px;
+
+}
+.reveal.slide{
+margin:10px !important ;
+  }
 .reveal .controls .controls-arrow:after, .reveal .controls .controls-arrow:before{
   top: -50px;
 }

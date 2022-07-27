@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { auth } from "./service/firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -16,6 +16,8 @@ import AppHeader from "./layout/AppHeader";
 //import './service/firebase';
 
 function App() {
+  const location = useLocation();
+  console.log(location);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -27,7 +29,9 @@ function App() {
   //console.log(user);
   return (
     <div className="App">
+      {/* {user && !location?.path?.includes("/reval") && <AppHeader user={user} />} */}
       {user && <AppHeader user={user} />}
+
       <Routes>
         <Route path="/" element={user ? <Home user={user} /> : <Login />} />
         <Route path="/login" element={<Login />} />
